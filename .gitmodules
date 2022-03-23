@@ -1,0 +1,12 @@
+[submodule "chronicle-api"]
+	path = chronicle-api
+	url = git@github.com:methodic-labs/chronicle-api.git
+[submodule "chronicle-server"]
+	path = chronicle-server
+	url = git@github.com:methodic-labs/chronicle-server.git
+[submodule "rhizome"]
+	path = rhizome
+	url = git@github.com:geekbeast/rhizome.git
+[submodule "rhizome-client"]
+	path = rhizome-client
+	url = git@github.com:geekbeast/rhizome-client.git

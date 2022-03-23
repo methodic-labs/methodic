@@ -1,0 +1,16 @@
+logging/
+.classpath
+.project
+.gradle/
+.settings/
+.idea/
+bin/
+build/
+out/
+artifacts/
+.DS_Store
+*.iml
+*.swp
+*.jstack
+chronicle-server/src/main/resources/auth0.yaml
+methodic-keys.gpg-key

@@ -1,0 +1,49 @@
+repositories {
+  //Hit our releases
+  maven {
+    url 'https://artifactory.openlattice.com/artifactory/libs-release/'
+  }
+  
+  maven {
+    url 'https://artifactory.openlattice.com/artifactory/gradle-release/'
+  }
+  
+  maven {
+    url 'https://artifactory.openlattice.com/artifactory/gradle-plugins/'
+  }
+  
+  maven {
+    url 'https://artifactory.openlattice.com/artifactory/jcenter/'
+  }
+
+  //Hit our snapshots
+  maven {
+    url 'https://artifactory.openlattice.com/artifactory/libs-snapshot/'
+  }
+
+  // Hit sonatype snapshots
+  maven {
+    url 'https://oss.sonatype.org/content/repositories/snapshots'
+  }
+
+  maven {
+    url = "https://plugins.gradle.org/m2/"
+  }
+
+  maven {
+    url "https://repo.spring.io/release/"
+  }
+  maven {
+    url "https://repo.maven.apache.org/maven2"
+  }
+  maven {
+    url "https://repository.apache.org/snapshots/"
+  }
+
+  // Hit mavencentral
+
+  // For cascading hadoop jar
+  maven {
+    url "https://conjars.org/repo/"
+  }
+}
