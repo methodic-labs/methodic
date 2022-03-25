@@ -103,8 +103,8 @@ if(ext."signing.keyId" != null ) {
                 maven {
                     url snapshotUrl
                     credentials {
-                        username = System.getenv("MAVEN_USERNAME")
-                        password = System.getenv("MAVEN_PASSWORD")
+                        username = System.getenv("GITHUB_ACTOR")
+                        password = System.getenv("GITHUB_TOKEN")
                     }
                 }
             }
