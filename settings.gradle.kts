@@ -18,7 +18,7 @@ pluginManagement {
     }
 }
 
-rootProject.name="methodic"
+rootProject.name="methodic%$!bl;jsdfklg"
 
 include("chronicle-api")
 include("chronicle-server")

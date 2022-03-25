@@ -1,1 +1,1 @@
-rootProject.name = "shared-gradles"
+rootProject.name = "gradles"
