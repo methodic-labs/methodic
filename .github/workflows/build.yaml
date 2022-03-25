@@ -32,6 +32,12 @@ jobs:
       - name: Prepare environment
         if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/main'
         run: ./scripts/decrypt_signing_key.sh
+        env:
+          GPG_SECRET: ${{ secrets.GPG_SECRET }}
+          SIGNING_KEY_PASSPHRASE: ${{ secrets.SIGNING_KEY_PASSPHRASE }}
+      - name: Prepare environment
+        if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/main'
+        run: ./scripts/decrypt_signing_key.sh
         run: ./gradlew tasks
         env:
           GPG_SECRET: ${{ secrets.GPG_SECRET }}
