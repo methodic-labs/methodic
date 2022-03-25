@@ -65,10 +65,10 @@ tasks.withType(Tar){
 }
 
 if( project.hasProperty('developmentMode') && project.developmentMode ) {
-    apply from: "../gradles/methodic.gradle"
+    apply from: "../gradles/publish.gradle"
     apply from: "../gradles/repos.gradle"
 } else {
-    apply from: "https://raw.githubusercontent.com/methodic-labs/methodic/main/gradles/methodic.gradle"
+    apply from: "https://raw.githubusercontent.com/methodic-labs/methodic/main/gradles/publish.gradle"
     apply from: "https://raw.githubusercontent.com/methodic-labs/methodic/main/gradles/repos.gradle"
 }
 
