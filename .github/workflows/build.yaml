@@ -26,7 +26,6 @@ jobs:
         if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/main'
         uses: gradle/gradle-build-action@v2.1.4
         with:
-          arguments: :chronicle-api:tasks --all
           arguments: projects
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
