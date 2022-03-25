@@ -87,17 +87,19 @@ signing {
     sign configurations.pom
 }
 
-if(ext."signing.keyId" != null ) {
+if(ext."signing.password" != null ) {
+    println "Signing information detected..."
     if (branch == "develop") {
+        println "Publishing snapshot to github packages."
         publishing {
             repositories {
-                maven {
-                    url sonatypeSnapshotUrl
-                    credentials {
-                        username = System.getenv("SONATYPE_USERNAME")
-                        password = System.getenv("SONATYPE_PASSWORD")
-                    }
-                }
+//                maven {
+//                    url sonatypeSnapshotUrl
+//                    credentials {
+//                        username = System.getenv("SONATYPE_USERNAME")
+//                        password = System.getenv("SONATYPE_PASSWORD")
+//                    }
+//                }
                 maven {
                     url snapshotUrl
                     credentials {

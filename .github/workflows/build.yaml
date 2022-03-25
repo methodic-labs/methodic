@@ -68,7 +68,7 @@ jobs:
         if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/main'
         uses: gradle/gradle-build-action@v2.1.4
         with:
-          arguments: build -x :chronicle-server:spotbugsMain -x :chronicle-server:spotbugsTest -x :chronicle-server:test publish
+          arguments: build -x :chronicle-server:spotbugsMain -x :chronicle-server:spotbugsTest -x :chronicle-server:test :chronicle-api:publish
         env:
           GPG_SECRET: ${{ secrets.GPG_SECRET }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
