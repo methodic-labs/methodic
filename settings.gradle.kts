@@ -10,8 +10,6 @@ pluginManagement {
         id("org.jetbrains.kotlin.plugin.spring")        version "1.6.10" apply false
         id("com.github.jk1.dependency-license-report")  version "1.16" apply false
 
-        id("application")
-        id("java-library")
         id("idea")
         id("jacoco")
         id("checkstyle")
