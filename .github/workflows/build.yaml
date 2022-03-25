@@ -22,14 +22,14 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
       - name: Prepare environment
           if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/main'
           run: ./scripts/decrypt_signing_key.sh
           env:
             GPG_SECRET: ${{ secrets.GPG_SECRET }}
             SIGNING_KEY_PASSPHRASE: ${{ secrets.SIGNING_KEY_PASSPHRASE }}
-      - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
       - name: Build with Gradle
         uses: gradle/gradle-build-action@937999e9cc2425eddc7fd62d1053baf041147db7
         with:
