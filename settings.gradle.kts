@@ -17,11 +17,6 @@ pluginManagement {
         maven(url = "https://plugins.gradle.org/m2/")
         mavenCentral()
     }
-
-    buildScan {
-        termsOfServiceUrl = "https://gradle.com/terms-of-service"
-        termsOfServiceAgree = "yes"
-    }
 }
 
 rootProject.name="methodic"
