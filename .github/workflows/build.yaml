@@ -5,7 +5,7 @@ permissions:
   pull-requests: write
   packages: write
 jobs:
-  build-chronicle-api:
+  build-chronicle-platform:
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -68,7 +68,7 @@ jobs:
         if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/main'
         uses: gradle/gradle-build-action@v2.1.4
         with:
-          arguments: build -x :chronicle-server:spotbugsMain -x :chronicle-server:spotbugsTest -x :chronicle-server:test :chronicle-api:publish
+          arguments: :chronicle-api:publish
         env:
           GPG_SECRET: ${{ secrets.GPG_SECRET }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
