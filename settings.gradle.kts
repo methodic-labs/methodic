@@ -14,7 +14,6 @@ pluginManagement {
         id("java-library")
         id("idea")
         id("jacoco")
-        id("java")
         id("checkstyle")
         id("maven-publish")
         id("signing")
