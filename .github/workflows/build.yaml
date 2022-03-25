@@ -35,7 +35,9 @@ jobs:
 #      - name: Setup Gradle
 #        uses: gradle/gradle-build-action@v2.1.4
       - name: Execute Gradle Build
-        run: ./gradlew build --scan
+        run: chmod +x ./gradlew
+      - name: Execute Gradle Build
+        run: ./gradlew build
         env:
           GPG_SECRET: ${{ secrets.GPG_SECRET }}
           SIGNING_KEY_ID: 9A876C253E22F886AD1E142C776BD8BD6341EF40
