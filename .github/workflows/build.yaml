@@ -1,4 +1,4 @@
-name: Chronicle API build
+name: Chronicle platform build
 on: [push]
 permissions:
   contents: read
