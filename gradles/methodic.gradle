@@ -64,8 +64,13 @@ tasks.withType(Tar){
   compression = Compression.GZIP
 }
 
-apply from: "../gradles/repos.gradle"
-apply from: "../gradles/publish.gradle"
+if( project.hasProperty('developmentMode') && project.developmentMode ) {
+    apply from: "../gradles/methodic.gradle"
+    apply from: "../gradles/repos.gradle"
+} else {
+    apply from: "https://raw.githubusercontent.com/methodic-labs/methodic/main/gradles/methodic.gradle"
+    apply from: "https://raw.githubusercontent.com/methodic-labs/methodic/main/gradles/repos.gradle"
+}
 
 //Run jacoco after tests.
 if( project.hasProperty('projectName') && project.hasProperty('scmUrl')  ) {
