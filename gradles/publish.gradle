@@ -148,6 +148,45 @@ if(ext."signing.password" != null ) {
                     artifact sourcesJar
                     artifact testJar
                 }
+                gpr(MavenPublication) {
+                    pom.withXml {
+                        asNode().children().last() + {
+                            resolveStrategy = Closure.DELEGATE_FIRST
+                            name jarname
+
+                            scm {
+                                url scmUrl
+                                connection connectionUrl
+                                developerConnection developerConnectionUrl
+                            }
+
+                            licenses {
+                                license {
+                                    name 'The Apache License, Version 2.0'
+                                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                                    distribution 'repo'
+                                }
+                            }
+
+                            developers {
+                                developer {
+                                    id 'methodic'
+                                    name 'Methodic Team'
+                                    email 'support@getmethodic.com'
+                                }
+                            }
+                        }
+                    }
+                    from components.java
+                    // artifact ('README.md') {
+                    //    classifier = 'README'
+                    //    extension  = 'md'
+                    // }
+
+                    artifact javadocJar
+                    artifact sourcesJar
+                    artifact testJar
+                }
             }
         }
         signing {
