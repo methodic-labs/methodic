@@ -6,7 +6,6 @@ ext.githubPackageUrl = "https://maven.pkg.github.com/methodic-labs/methodic"
 ext.sonatypeMasterUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
 ext.sonatypeSnapshotUrl = "https://oss.sonatype.org/content/repositories/snapshots"
 
-def branch = "$System.env.bamboo_planRepository_branchName"
 
 def jarname = ""
 def scmUrl = ""
@@ -27,19 +26,25 @@ if (project.hasProperty('projectName') && project.hasProperty('scmUrl')) {
 
 println "Basename for jars will be: " + jarname
 
-if (branch == null || branch == "") {
-    println "Unable to detect bamboo branch for project ${jarname}"
-    def stdout = new ByteArrayOutputStream()
-    exec {
-        commandLine 'git', 'rev-parse', '--abbrev-ref', 'HEAD'
-        standardOutput = stdout
-    }
-    branch = stdout.toString().trim()
-    if (branch == null) {
-        branch = System.getenv("GITHUB_REF")
-        branch = branch.substring(branch.lastIndexOf('/') + 1)
-    }
+def stdout = new ByteArrayOutputStream()
+
+exec {
+    commandLine 'git', 'rev-parse', '--abbrev-ref', 'HEAD'
+    standardOutput = stdout
 }
+def maybeBranch = stdout.toString().trim()
+def ghBranch = System.getenv("GITHUB_REF")
+println "Branch from git: " + maybeBranch
+println "Github ref: " + ghBranch
+if( ghBranch != null ) {
+    ghBranch = ghBranch.substring(ghBranch.lastIndexOf('/') + 1)
+}
+
+if (maybeBranch == null && ghBranch == null) {
+    println "Unable to detect bamboo branch from git for ${jarname}. Publishing will likely not work."
+}
+
+def branch = ghBranch ?: maybeBranch
 
 println "Branch detected as: " + branch
 println "Version detected as: " + version
