@@ -1,8 +1,8 @@
 tasks.withType(PublishToMavenRepository) { it.dependsOn test }
 
-ext.snapshotUrl = "https://artifactory.openlattice.com/artifactory/libs-snapshot-local"
-ext.releaseUrl = "https://artifactory.openlattice.com/artifactory/libs-release-local"
-ext.githubPackageUrl = "https://maven.pkg.github.com/methodic-labs/REPOSITORY"
+//ext.snapshotUrl = "https://artifactory.openlattice.com/artifactory/libs-snapshot-local"
+//ext.releaseUrl = "https://artifactory.openlattice.com/artifactory/libs-release-local"
+ext.githubPackageUrl = "https://maven.pkg.github.com/methodic-labs/methodic"
 ext.sonatypeMasterUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
 ext.sonatypeSnapshotUrl = "https://oss.sonatype.org/content/repositories/snapshots"
 
@@ -35,6 +35,10 @@ if( branch == null || branch == "" ) {
         standardOutput = stdout
     }
     branch=stdout.toString().trim()
+    if( branch == null ){
+        branch = System.getenv("GITHUB_REF")
+        branch = branch.substring(branch.lastIndexOf('/')+1)
+    }
 }
 
 println "Branch detected as: " + branch
@@ -77,7 +81,7 @@ artifacts {
 archivesBaseName = jarname
 
 ext."signing.password" = System.getenv("SIGNING_KEY_PASSPHRASE")
-
+ext.
 configurations {
     pom
 }
@@ -101,7 +105,7 @@ if(ext."signing.password" != null ) {
 //                    }
 //                }
                 maven {
-                    url snapshotUrl
+                    url githubPackageUrl
                     credentials {
                         username = System.getenv("GITHUB_ACTOR")
                         password = System.getenv("GITHUB_TOKEN")
@@ -148,46 +152,6 @@ if(ext."signing.password" != null ) {
                     artifact sourcesJar
                     artifact testJar
                 }
-                gpr(MavenPublication) {
-                    pom.withXml {
-                        asNode().children().last() + {
-                            resolveStrategy = Closure.DELEGATE_FIRST
-                            name jarname
-
-                            scm {
-                                url scmUrl
-                                connection connectionUrl
-                                developerConnection developerConnectionUrl
-                            }
-
-                            licenses {
-                                license {
-                                    name 'The Apache License, Version 2.0'
-                                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                                    distribution 'repo'
-                                }
-                            }
-
-                            developers {
-                                developer {
-                                    id 'methodic'
-                                    name 'Methodic Team'
-                                    email 'support@getmethodic.com'
-                                }
-                            }
-                        }
-                    }
-                    from components.java
-                    // artifact ('README.md') {
-                    //    classifier = 'README'
-                    //    extension  = 'md'
-                    // }
-
-                    artifact javadocJar
-                    artifact sourcesJar
-                    artifact testJar
-                }
-            }
         }
         signing {
             sign publishing.publications.mavenJava
@@ -203,7 +167,7 @@ if(ext."signing.password" != null ) {
                 //     }
                 // }
                 maven {
-                    url releaseUrl
+                    url githubPackageUrl
                     credentials {
                         username = System.getenv("MAVEN_USERNAME")
                         password = System.getenv("MAVEN_PASSWORD")
