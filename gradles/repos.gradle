@@ -40,6 +40,10 @@ repositories {
     url "https://repository.apache.org/snapshots/"
   }
 
+  maven {
+    url "https://maven.pkg.github.com/methodic-labs/methodic"
+  }
+
   // Hit mavencentral
 
   // For cascading hadoop jar
