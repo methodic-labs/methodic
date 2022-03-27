@@ -46,6 +46,71 @@ if (maybeBranch == null && ghBranch == null) {
 
 def branch = ghBranch ?: maybeBranch
 
+// If git tag --contains has tags, then you're on-tag
+//   for each tag in ^, release -dev to SNAPSHOT and non-dev to MAIN
+// else (if git tag --contains has no tags), then off-tag
+//   assumed that the resolved tag will be a -dev tag (error msg if not)
+//   release -dev to SNAPSHOT
+
+class Tag {
+    String version
+    Boolean snapshot
+
+    String toString() {
+        def snp
+        if (snapshot) {
+            snp = "-SNAPSHOT"
+        } else {
+            snp = ""
+        }
+        return "${version}${snp}"
+    }
+}
+
+static def convertToTag(tagString, branchString) {
+    def semVer = (tagString =~ /v?([\d\.]+)/)[0][1]
+    if( branchString == "main" || branchString == "master" ) {
+        return new Tag(version: semVer, snapshot: false)
+    } else {
+        return new Tag(version: semVer, snapshot: true)
+    }
+}
+
+def runCommand(String... command) {
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine command
+        standardOutput = stdout
+    }
+    return stdout.toString()
+}
+
+def describeOutputTag = convertToTag(
+        runCommand('git', 'describe', '--tags', '--long').trim(),
+        branch
+)
+
+def getVersionName = { ->
+    return describeOutputTag.toString()
+}
+
+version = getVersionName()
+
+//This gets the version plus build number, no -SNAPSHOTs
+def getFullVersion = { ->
+    if (!describeOutputTag.snapshot) {
+        return describeOutputTag.toString()
+    }
+
+    ext.bambooBuild =".${System.getenv("bamboo_buildNumber")}"
+    if ( ext.bambooBuild == ".null" ) {
+        ext.bambooBuild = "-SNAPSHOT"
+        return describeOutputTag.toString()
+    }
+    return "${describeOutputTag.version}${ext.bambooBuild}"
+}
+ext.fullVersion = getFullVersion()
+
 println "Branch detected as: " + branch
 println "Version detected as: " + version
 println "Full version detected as: " + ext.fullVersion
@@ -173,8 +238,8 @@ if (ext."signing.password" != null) {
                 maven {
                     url githubPackageUrl
                     credentials {
-                        username = System.getenv("MAVEN_USERNAME")
-                        password = System.getenv("MAVEN_PASSWORD")
+                        username = System.getenv("GITHUB_ACTOR")
+                        password = System.getenv("GITHUB_TOKEN")
                     }
                 }
             }
