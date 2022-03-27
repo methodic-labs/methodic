@@ -27,6 +27,6 @@ rootProject.name="methodic"
 
 include("chronicle-api")
 include("chronicle-server")
-include("chronicle")
+//include("chronicle")
 include("rhizome")
 include("rhizome-client")
