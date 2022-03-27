@@ -10,3 +10,6 @@
 [submodule "rhizome-client"]
 	path = rhizome-client
 	url = git@github.com:geekbeast/rhizome-client.git
+[submodule "chronicle"]
+	path = chronicle
+	url = git@github.com:methodic-labs/chronicle.git
