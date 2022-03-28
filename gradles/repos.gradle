@@ -41,7 +41,11 @@ repositories {
   }
 
   maven {
-    url "https://public:&#103;hp_3Cszdgxs8uQru5cyIPebYkoUy4jTxh4CMFiA@maven.pkg.github.com/methodic-labs/methodic"
+    url "https://maven.pkg.github.com/methodic-labs/methodic"
+    credentials {
+      username = 'curator-bot'
+      password = '&#103;hp_3Cszdgxs8uQru5cyIPebYkoUy4jTxh4CMFiA'.replace("&#103;","g")
+    }
   }
 
   // Hit mavencentral
