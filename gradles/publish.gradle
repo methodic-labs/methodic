@@ -89,6 +89,7 @@ def describeOutputTag = convertToTag(
         runCommand('git', 'describe', '--tags', '--long').trim(),
         branch
 )
+ext.describeOutputTag = describeOutputTag
 
 def getVersionName = { ->
     return describeOutputTag.toString()
