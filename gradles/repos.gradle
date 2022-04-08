@@ -1,24 +1,11 @@
 repositories {
-  //Hit our releases
+  //Hit our repos first.
   maven {
-    url 'https://artifactory.openlattice.com/artifactory/libs-release/'
-  }
-  
-  maven {
-    url 'https://artifactory.openlattice.com/artifactory/gradle-release/'
-  }
-  
-  maven {
-    url 'https://artifactory.openlattice.com/artifactory/gradle-plugins/'
-  }
-  
-  maven {
-    url 'https://artifactory.openlattice.com/artifactory/jcenter/'
-  }
-
-  //Hit our snapshots
-  maven {
-    url 'https://artifactory.openlattice.com/artifactory/libs-snapshot/'
+    url "https://maven.pkg.github.com/methodic-labs/methodic"
+    credentials {
+      username = 'curator-bot'
+      password = '&#103;hp_3Cszdgxs8uQru5cyIPebYkoUy4jTxh4CMFiA'.replace("&#103;","g")
+    }
   }
 
   // Hit sonatype snapshots
@@ -38,14 +25,6 @@ repositories {
   }
   maven {
     url "https://repository.apache.org/snapshots/"
-  }
-
-  maven {
-    url "https://maven.pkg.github.com/methodic-labs/methodic"
-    credentials {
-      username = 'curator-bot'
-      password = '&#103;hp_3Cszdgxs8uQru5cyIPebYkoUy4jTxh4CMFiA'.replace("&#103;","g")
-    }
   }
 
   // Hit mavencentral
