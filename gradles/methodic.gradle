@@ -60,7 +60,7 @@ println "Resolving dependencies in devMode: ${developmentMode}"
 /**
  * Internal Versions
  **/
-ext.chronicle_api_version='0.1.0'
+ext.chronicle_api_version='0.1.2'
 ext.chronicle_server_version='3.0.1'
 ext.rhizome_version='3.1.4'
 ext.rhizome_client_version='0.0.15'
