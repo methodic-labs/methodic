@@ -26,9 +26,4 @@ repositories {
   maven {
     url "https://repository.apache.org/snapshots/"
   }
-
-  // For cascading hadoop jar
-  maven {
-    url "https://conjars.org/repo/"
-  }
 }
