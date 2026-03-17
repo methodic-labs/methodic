@@ -13,3 +13,6 @@
 [submodule "chronicle"]
 	path = chronicle
 	url = git@github.com:methodic-labs/chronicle.git
+[submodule "chronicle-web"]
+	path = chronicle-web
+	url = git@github.com:methodic-labs/chronicle-web
