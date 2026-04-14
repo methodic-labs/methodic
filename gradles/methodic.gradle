@@ -82,7 +82,7 @@ ext.auth0_jwks_rsa_version='0.22.1'
 ext.auth0_mvc_auth_commons_version='1.11.0'
 ext.auth0_spring_version='1.5.3'
 ext.auth0_version='2.19.0'
-ext.aws_java_sdk_version='1.12.783'
+
 ext.checkstyle_version='8.23'
 ext.commons_cli_version='1.4'
 ext.commons_codec_version='1.18.0'
